@@ -10,7 +10,9 @@ import React from "react";
 import { title } from "process";
 
 const letters = "abcdefghijklmnopqrstuvwxyz".split("");
-
+const SoundNext = new Howl({
+  src: ["/next.mp3"],
+});
 function BTN(event) {
   const buttonText = event.currentTarget.textContent;
   console.log(buttonText);
@@ -41,6 +43,11 @@ function Next_Stage() {
     icon: "success",
     confirmButtonText: `Next`,
     allowOutsideClick: false, // Prevent closing by clicking outside
+    preConfirm: (c) => {
+      if (c) {
+        SoundNext.play();
+      }
+    },
   });
 }
 function lose() {
@@ -157,6 +164,9 @@ function Game() {
   });
   const Soundcorrect = new Howl({
     src: ["/win.mp3"],
+  });
+  const SoundNext = new Howl({
+    src: ["/next.mp3"],
   });
 
   useEffect(() => {
