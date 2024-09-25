@@ -51,6 +51,25 @@ function lose() {
     allowOutsideClick: false, // Prevent closing by clicking outside
   });
 }
+async function ArchiveName() {
+  const newItem = { name: "itemName", value: "itemValue" };
+
+  const response = await fetch("/api/UpdateArchive", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newItem),
+  });
+
+  if (response.ok) {
+    console.log("Item added successfully");
+    setItemName("");
+    setItemValue("");
+  } else {
+    console.error("Failed to add item");
+  }
+}
 function sweetalert(b, setb) {
   if (b === 1) {
   } else {
@@ -71,6 +90,7 @@ function sweetalert(b, setb) {
           Swal.showValidationMessage("Name is required");
           return false;
         } else {
+          ArchiveName();
           return Swal.fire({
             title: "hi " + login,
             icon: "success",
@@ -134,6 +154,9 @@ function Game() {
   const [tentative, settentative] = useState(maxtentativ);
   const SoundIncorrect = new Howl({
     src: [IncorrectSound],
+  });
+  const Soundcorrect = new Howl({
+    src: ["/win.mp3"],
   });
 
   useEffect(() => {
@@ -207,6 +230,7 @@ function Game() {
         newwordc[i] = word[i];
         found = true;
         setwordc(newwordc.join(""));
+        Soundcorrect.play();
         break;
       }
     }
