@@ -92,6 +92,7 @@
 }
 
 .tentativetext {
+  color: black;
   margin-right: 10px;
 }
 
@@ -125,6 +126,7 @@
   margin: auto;
   text-transform: uppercase;
   letter-spacing: 5px;
+  color: black;
 }
 
 .h3 {
