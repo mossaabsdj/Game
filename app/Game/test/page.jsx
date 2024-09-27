@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
+function ImageSplitter({ random, imgg, scalee, rowss, colss }) {
   const imageRef = useRef(null);
   const [img, setimg] = useState(null);
   const [scale, setscale] = useState(1);
@@ -133,6 +133,6 @@ const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
       ></div>
     </div>
   );
-};
+}
 
 export default ImageSplitter;

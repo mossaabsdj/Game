@@ -3,7 +3,7 @@ import Image from "next/image";
 import style from "./page.module.css";
 import GImage from "./G.jpg";
 import IncorrectSound from "./incorrect.mp3";
-import Splitimg from "./test/page.jsx";
+import ImageSplitter from "./test/page.jsx"; // Ensure this is a valid component
 import { Howl } from "howler";
 import { useEffect, useRef, useState } from "react";
 const Swal = require("sweetalert2");
@@ -338,7 +338,7 @@ function Game() {
 
             <div className={style.Guess}>
               <h3 className={style.h3}>Guess: </h3>{" "}
-              <Splitimg
+              <ImageSplitter
                 colss={col[level]}
                 rowss={row[level]}
                 imgg={img[level]}
