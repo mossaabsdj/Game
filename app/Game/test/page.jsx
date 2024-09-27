@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
+const ImageSplitter = () => {
+  const random = 1;
+  const imgg = "download.jpg";
+  const scalee = 1;
+  const rowss = 2;
+  const colss = 2;
+
   const imageRef = useRef(null);
   const [img, setimg] = useState("download.jpg");
   const [scale, setscale] = useState(1);
