@@ -2,32 +2,35 @@
 
 import { useEffect, useRef, useState } from "react";
 
-function ImageSplitter({ random, imgg, scalee, rowss, colss }) {
+const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
   const imageRef = useRef(null);
   const [img, setimg] = useState(null);
   const [scale, setscale] = useState(1);
   const [row, setrow] = useState(6);
   const [col, setcol] = useState(2);
+
   useEffect(() => {
     setcol(colss);
   }, [colss]);
+
   useEffect(() => {
     setscale(scalee);
   }, [scalee]);
+
   useEffect(() => {
     setrow(rowss);
   }, [rowss]);
+
   useEffect(() => {
-    console.log("imgg" + imgg);
     setimg(imgg);
   }, [imgg]);
+
   const unlock = (i) => {
     const canvas = document.getElementById("canvas-" + i);
     if (canvas) {
       const ctx = canvas.getContext("2d");
-
       const image = new Image();
-      image.src = img; // Replace with your image path
+      image.src = img;
 
       image.onload = () => {
         const rows = row; // Number of rows
@@ -57,18 +60,18 @@ function ImageSplitter({ random, imgg, scalee, rowss, colss }) {
   };
 
   useEffect(() => {
-    if (random === null) {
-    } else {
+    if (random !== null) {
       unlock(random);
     }
   }, [random]);
+
   useEffect(() => {
     const image = new Image();
     image.src = img;
 
     image.onload = () => {
-      const rows = row; // Number of rows
-      const cols = col; // Number of columns
+      const rows = row;
+      const cols = col;
       const scaleFactor = scale;
       const scaledWidth = (image.width * scaleFactor) / cols;
       const scaledHeight = (image.height * scaleFactor) / rows;
@@ -121,7 +124,7 @@ function ImageSplitter({ random, imgg, scalee, rowss, colss }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "10vh", // Full viewport height for vertical centering
+        height: "10vh",
       }}
     >
       <div
@@ -133,6 +136,6 @@ function ImageSplitter({ random, imgg, scalee, rowss, colss }) {
       ></div>
     </div>
   );
-}
+};
 
 export default ImageSplitter;
