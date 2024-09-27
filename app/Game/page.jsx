@@ -3,6 +3,7 @@ import Image from "next/image";
 import style from "./page.module.css";
 import GImage from "./G.jpg";
 import IncorrectSound from "./incorrect.mp3";
+import Splitimg from "./test/page.jsx";
 import { Howl } from "howler";
 import { useEffect, useRef, useState } from "react";
 const Swal = require("sweetalert2");
@@ -13,6 +14,9 @@ const letters = "abcdefghijklmnopqrstuvwxyz".split("");
 const SoundNext = new Howl({
   src: ["/next.mp3"],
 });
+
+// Call the function with your image source
+
 function BTN(event) {
   const buttonText = event.currentTarget.textContent;
   console.log(buttonText);
@@ -21,7 +25,7 @@ function BTN(event) {
 function win() {
   return Swal.fire({
     title: "Congratulations!",
-    text: "You graduated!",
+    text: "you are super fan!",
     width: 600,
     padding: "3em",
     color: "#fff",
@@ -35,12 +39,14 @@ function win() {
     confirmButtonText: "Hooray!",
     confirmButtonColor: "#ff9800",
     icon: "success",
+    imageUrl: "duncky.jpg",
   });
 }
-function Next_Stage() {
+function Next_Stage(img, level) {
   return Swal.fire({
     title: "Stage Done ",
     icon: "success",
+    imageUrl: img[level],
     confirmButtonText: `Next`,
     allowOutsideClick: false, // Prevent closing by clicking outside
     preConfirm: (c) => {
@@ -97,7 +103,7 @@ function sweetalert(b, setb) {
           Swal.showValidationMessage("Name is required");
           return false;
         } else {
-          ArchiveName();
+          // ArchiveName();
           return Swal.fire({
             title: "hi " + login,
             icon: "success",
@@ -146,14 +152,29 @@ function Stage(Word, l) {
 }
 
 function Game() {
+  var defaultarray = [0, 1, 2, 3, 4, 5, 6, 7];
+  const [find, setfind] = useState(false);
+  const [array, setarray] = useState([0, 1, 2, 3, 4, 5, 6, 7]);
+  const [random, setrandom] = useState(null);
+  const containerRef = useRef(null);
   const maxtentativ = 7;
   const DangerTentative = 3;
   var found = false;
   const [b, setb] = useState(0);
   const [level, setlevel] = useState(0);
   const [tentative_effect, settentative_effect] = useState("");
-  var words = ["mossaab", "informatics", "swimming"];
-  var geusses = ["Someone's name", "Someone's specialty", "Someone's sport"];
+  var words = ["librarys", "swimming", "onepiece", "mossaabsdj"];
+  var geusses = [
+    "Someone's  Job Places ",
+    "Someone's sport",
+    "Someone's Best Anime",
+    "best person in the world",
+  ];
+  var img = ["download.jpg", "swimming.jpg", "onepiece.jpg", "mossaab.jpg"];
+  var row = [4, 4, 4, 5];
+  var col = [2, 2, 2, 2];
+
+  var Scale = [0.9, 0.9, 0.7, 0.2];
   const [word, setword] = useState(words[level]);
   const [guess, setguess] = useState(geusses[level]);
   const prevWordc = useRef();
@@ -168,8 +189,26 @@ function Game() {
   const SoundNext = new Howl({
     src: ["/next.mp3"],
   });
-
   useEffect(() => {
+    if (find === true) {
+      let randomIndex = Math.floor(Math.random() * array.length);
+      let randomNumber = array[randomIndex];
+      array.splice(randomIndex, 1);
+      setarray([...array]); // Create a new array reference
+      setrandom(randomNumber);
+    }
+  }, [find]);
+  useEffect(() => {
+    let arrayy = [];
+    let l = words[level].length;
+    console.log("word[level].length" + words[level]);
+    for (let i = 0; i < l; i++) {
+      arrayy.push(i);
+    }
+    console.log("array level" + arrayy);
+    setarray(arrayy);
+
+    console.log("image" + img[0]);
     setword(words[level]);
     setwordc("*".repeat(words[level].length));
     setguess(geusses[level]);
@@ -192,7 +231,8 @@ function Game() {
         win();
       } else {
         setlevel(level + 1);
-        Next_Stage();
+        //console.log("img level" + img[level]);
+        Next_Stage(img, level);
       }
     }
     console.log(tentative + "------" + wordc);
@@ -239,8 +279,12 @@ function Game() {
       if ((word[i] === buttonText) & (newwordc[i] != buttonText)) {
         newwordc[i] = word[i];
         found = true;
+        setfind(true);
         setwordc(newwordc.join(""));
         Soundcorrect.play();
+        setTimeout(() => {
+          setfind(false);
+        }, 5);
         break;
       }
     }
@@ -274,7 +318,7 @@ function Game() {
       const div = divs[0];
 
       // Apply the blur effect using CSS
-      div.style.filter = "blur(10px)"; // Adjust the blur amount as needed
+      div.style.filter = "blur(5px)"; // Adjust the blur amount as needed
     }
     sweetalert(b, setb);
   }, []);
@@ -291,9 +335,16 @@ function Game() {
             <div className={style.worddisplay} id="word-display">
               <div id="s"></div>
             </div>
-            <div className={style.Guess}>
-              <h3 className={style.h3}>Guess:</h3>
 
+            <div className={style.Guess}>
+              <h3 className={style.h3}>Guess: </h3>{" "}
+              <Splitimg
+                colss={col[level]}
+                rowss={row[level]}
+                imgg={img[level]}
+                scalee={Scale[level]}
+                random={random}
+              />
               <h4 className={style.h4}>{guess}</h4>
             </div>
 

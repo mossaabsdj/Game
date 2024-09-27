@@ -124,7 +124,7 @@
   background: #fff;
   display: flex;
   gap: 60px;
-  align-items: flex-end;
+  align-items: center;
   padding: 60px 40px;
   border-radius: 10px;
   margin: 0px;
@@ -136,11 +136,12 @@
 }
 
 .Guess {
+  display: flex;
+  flex-direction: column;
   background-color: #5e63ba;
   border-radius: 20px;
-  height: 80px;
   margin-right: 0px;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   margin-left: 0px;
 }
 
@@ -154,7 +155,7 @@
 }
 
 .h3 {
-  margin-left: 200px;
+  margin-left: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
   color: #fff;
@@ -165,7 +166,7 @@
   margin-left: 0px;
   margin-right: 20px;
   margin-bottom: 100px;
-  margin-top: 0px;
+  margin-top: 40px;
 }
 
 .jeupendu h1 {
@@ -242,7 +243,7 @@
   .container {
     width: 100%;
     /* Full width for smaller screens */
-    flex-direction: column;
+    flex-direction: row;
     /* Stack vertically */
     padding: 20px;
     /* Adjust padding */
@@ -254,6 +255,16 @@
     /* Responsive image */
     height: auto;
     /* Maintain aspect ratio */
+  }
+  .jeupendu {
+    display: flex;
+    /* Add display flex */
+    flex-direction: column;
+    /* Stack elements vertically */
+    align-items: center;
+    /* Center children horizontally */
+    justify-content: center;
+    /* Center children vertically */
   }
   .Guess {
     height: auto;
@@ -273,12 +284,15 @@
   .h4 {
     margin-left: 0;
     /* Center alignment */
-    margin-top: 10px;
+    margin-top: 0px;
     /* Reduce top margin */
     margin-bottom: 10px;
     /* Reduce bottom margin */
     font-size: 1rem;
     /* Adjust font size */
+  }
+  .h4 {
+    margin-top: 30px;
   }
   .jeupendu h1 {
     font-size: 1.2rem;
