@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
   const imageRef = useRef(null);
-  const [img, setimg] = useState(null);
+  const [img, setimg] = useState("download.jpg");
   const [scale, setscale] = useState(1);
   const [row, setrow] = useState(6);
   const [col, setcol] = useState(2);
