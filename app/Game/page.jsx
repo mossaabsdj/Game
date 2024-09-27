@@ -278,10 +278,10 @@ function Game() {
           <div className={style.Guess}>
             <h3 className={style.h3}>Guess:</h3>
             <ImageSplitter
-              colss={col[1]}
-              rowss={row[1]}
-              imgg={img[1]}
-              scalee={Scale[1]}
+              colss={1}
+              rowss={1}
+              imgg={"download.jpg"}
+              scalee={1}
               random={1}
             />
             <h4 className={style.h4}>{guess}</h4>
