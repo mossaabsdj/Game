@@ -29,20 +29,20 @@ const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
     const canvas = document.getElementById("canvas-" + i);
     if (canvas) {
       const ctx = canvas.getContext("2d");
+
       const image = new Image();
       image.src = img;
 
       image.onload = () => {
-        const rows = row; // Number of rows
-        const cols = col; // Number of columns
-        const scaleFactor = scale; // Adjust this to change the size of the split images
+        const rows = row;
+        const cols = col;
+        const scaleFactor = scale;
         const scaledWidth = (image.width * scaleFactor) / cols;
         const scaledHeight = (image.height * scaleFactor) / rows;
 
-        ctx.filter = "blur(0px)"; // Remove blur
-
-        const x = i % cols; // Column index
-        const y = Math.floor(i / cols); // Row index
+        ctx.filter = "blur(0px";
+        const x = i % cols;
+        const y = Math.floor(i / cols);
 
         ctx.drawImage(
           image,
@@ -101,11 +101,6 @@ const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
 
           imageRef.current.appendChild(canvas);
         }
-      }
-
-      const imgs = document.getElementsByClassName("img");
-      while (imgs.length > 0) {
-        imgs[0].parentNode.removeChild(imgs[0]);
       }
     };
 
