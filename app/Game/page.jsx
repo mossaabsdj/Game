@@ -1,4 +1,5 @@
 "use client";
+import Head from "next/head";
 import Imagee from "next/image";
 import style from "./page.module.css";
 import GImage from "./G.jpg";
@@ -275,11 +276,11 @@ function Game() {
   const [level, setlevel] = useState(0);
   const [tentative_effect, settentative_effect] = useState("");
 
-  const words = ["librarys", "swimming", "onepiece", "mossaabsdj"];
+  const words = ["novembre", "swimming", "onepiece", "mossaabsdj"];
   const geusses = [
-    "Someone's Job Places",
+    "Someone's BirthMonth",
     "Someone's Sport",
-    "Someone's Best Anime",
+    "Someone's favorite Anime",
     "Best Person in the World",
   ];
   const img = ["download.jpg", "swimming.jpg", "onepiece.jpg", "mossaab.jpg"];
@@ -393,49 +394,57 @@ function Game() {
   }, []);
 
   return (
-    <div className={style.body}>
-      <div className={style.container}>
-        <div className={style.jeupendu}>
-          <Imagee src={GImage} />
-          <h1>JEU DU PENDU</h1>
-        </div>
-        <div className={style.gamebox}>
-          <div className={style.worddisplay} id="word-display">
-            <div id="s"></div>
+    <>
+      <Head>
+        <title>Mossaab</title>
+        <meta name="description" content="Your page description" />
+      </Head>
+      <div className={style.body}>
+        <div className={style.container}>
+          <div className={style.jeupendu}>
+            <Imagee src={GImage} />
+            <h1>JEU DU PENDU</h1>
           </div>
+          <div className={style.gamebox}>
+            <div className={style.worddisplay} id="word-display">
+              <div id="s"></div>
+            </div>
 
-          <div className={style.Guess}>
-            <h3 className={style.h3}>Guess:</h3>
-            <ImageSplitter
-              colss={col[level]}
-              rowss={row[level]}
-              imgg={img[level]}
-              scalee={Scale[level]}
-              random={random}
-            />
-            <h4 className={style.h4}>{guess}</h4>
-          </div>
+            <div className={style.Guess}>
+              <h3 className={style.h3}>Guess:</h3>
+              <ImageSplitter
+                colss={col[level]}
+                rowss={row[level]}
+                imgg={img[level]}
+                scalee={Scale[level]}
+                random={random}
+              />
+              <h4 className={style.h4}>{guess}</h4>
+            </div>
 
-          <h1 id="wordc" className={style.wordc}></h1>
-          <h4>
-            <span className={style.tentativetext}>TENTATIVES INCORRECTES</span>
-            <b>
-              <span className={tentative_effect}> {tentative}</span>/ {7}
-            </b>
-          </h4>
-          <div className={style.keyboard}>
-            {letters.map((l) => (
-              <button onClick={BTN} key={l} className={style.btn}>
-                {l}
-              </button>
-            ))}
+            <h1 id="wordc" className={style.wordc}></h1>
+            <h4>
+              <span className={style.tentativetext}>
+                TENTATIVES INCORRECTES
+              </span>
+              <b>
+                <span className={tentative_effect}> {tentative}</span>/ {7}
+              </b>
+            </h4>
+            <div className={style.keyboard}>
+              {letters.map((l) => (
+                <button onClick={BTN} key={l} className={style.btn}>
+                  {l}
+                </button>
+              ))}
 
-            <button className={style.btn}>GO</button>
-            <br />
+              <button className={style.btn}>GO</button>
+              <br />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
