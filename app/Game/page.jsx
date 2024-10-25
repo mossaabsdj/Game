@@ -283,7 +283,7 @@ function Game() {
     "Someone's favorite Anime",
     "Best Person in the World",
   ];
-  const img = ["download.jpg", "swimming.jpg", "onepiece.jpg", "mossaab.jpg"];
+  const img = ["november.png", "swimming.jpg", "onepiece.jpg", "mossaab.jpg"];
   const row = [4, 4, 4, 5];
   const col = [2, 2, 2, 2];
   const Scale = [0.9, 0.9, 0.7, 0.2];
