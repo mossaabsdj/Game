@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-
 export default function Home() {
   return (
     <main className={styles.main}>
@@ -10,11 +9,7 @@ export default function Home() {
           <code className={styles.code}> app / page.js </code>{" "}
         </p>{" "}
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a target="_blank" rel="noopener noreferrer">
             By{" "}
             <Image
               src="/vercel.svg"
@@ -26,7 +21,7 @@ export default function Home() {
             />
           </a>{" "}
         </div>{" "}
-      </div>
+      </div>{" "}
       <div className={styles.center}>
         <Image
           className={styles.logo}
@@ -36,7 +31,7 @@ export default function Home() {
           height={37}
           priority
         />
-      </div>
+      </div>{" "}
       <div className={styles.grid}>
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -48,7 +43,7 @@ export default function Home() {
             Docs <span> - & gt; </span>{" "}
           </h2>{" "}
           <p> Find in -depth information about Next.js features and API. </p>{" "}
-        </a>
+        </a>{" "}
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
@@ -62,7 +57,7 @@ export default function Home() {
             {" "}
             Learn about Next.js in an interactive course with & nbsp; quizzes!{" "}
           </p>{" "}
-        </a>
+        </a>{" "}
         <a
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
@@ -73,7 +68,7 @@ export default function Home() {
             Templates <span> - & gt; </span>{" "}
           </h2>{" "}
           <p> Explore starter templates for Next.js. </p>{" "}
-        </a>
+        </a>{" "}
         <a
           href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
