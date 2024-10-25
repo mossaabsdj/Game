@@ -286,7 +286,7 @@ function Game() {
   const img = ["november.png", "swimming.jpg", "onepiece.jpg", "mossaab.jpg"];
   const row = [4, 4, 4, 5];
   const col = [2, 2, 2, 2];
-  const Scale = [0.9, 0.9, 0.7, 0.2];
+  const Scale = [0.7, 0.9, 0.7, 0.2];
   const [word, setword] = useState(words[level]);
   const [guess, setguess] = useState(geusses[level]);
   const prevWordc = useRef();
