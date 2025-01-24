@@ -10,7 +10,8 @@ import { useEffect, useRef, useState } from "react";
 const Swal = require("sweetalert2");
 
 const letters = "abcdefghijklmnopqrstuvwxyz".split("");
-const SoundNext = new Howl({ src: ["/next.mp3"] });
+const SoundNext = new Howl({ src: ["/next.mp3"], preload: true });
+const Soundgta = new Howl({ src: ["/gta.mp3"], preload: true });
 
 function BTN(event) {
   const buttonText = event.currentTarget.textContent;
@@ -19,9 +20,9 @@ function BTN(event) {
 }
 
 function win() {
+  Soundgta.play();
   return Swal.fire({
     title: "Congratulations!",
-    text: "You are a super fan!",
     width: 600,
     padding: "3em",
     color: "#fff",
@@ -35,13 +36,12 @@ function win() {
     confirmButtonText: "Hooray!",
     confirmButtonColor: "#ff9800",
     icon: "success",
-    imageUrl: "duncky.jpg",
+    imageUrl: "lezhare.jpg",
   });
 }
 
 function Next_Stage(img, level) {
   return Swal.fire({
-    title: "Stage Done",
     icon: "success",
     imageUrl: img[level],
     confirmButtonText: "Next",
@@ -176,7 +176,9 @@ const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
         const scaledWidth = (image.width * scaleFactor) / cols;
         const scaledHeight = (image.height * scaleFactor) / rows;
 
-        ctx.filter = "blur(0px";
+        ctx.filter = "blur(0px)";
+        canvas.style.filter = "blur(0px)";
+
         const x = i % cols;
         const y = Math.floor(i / cols);
 
@@ -196,6 +198,7 @@ const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
   };
 
   useEffect(() => {
+    console.log("random" + random);
     if (random !== null) {
       unlock(random);
     }
@@ -220,9 +223,13 @@ const ImageSplitter = ({ random, imgg, scalee, rowss, colss }) => {
           canvas.id = `canvas-${y * cols + x}`;
           canvas.width = scaledWidth;
           canvas.height = scaledHeight;
+          //  canvas.style.webkitFilter = "blur(10px)"; // For Safari/iOS-specific browsers
+
           const ctx = canvas.getContext("2d");
+          ctx.customName = "blurCanvas";
 
           ctx.filter = "blur(20px)";
+          canvas.style.filter = "blur(20px)";
           ctx.drawImage(
             image,
             x * (image.width / cols),
@@ -276,32 +283,60 @@ function Game() {
   const [level, setlevel] = useState(0);
   const [tentative_effect, settentative_effect] = useState("");
 
-  const words = ["novembre", "swimming", "onepiece", "mossaabsdj"];
+  const words = ["nafir", "lalaoua", "foughali", "lalaoua", "lezhare"];
+
   const geusses = [
-    "Someone's BirthMonth",
-    "Someone's Sport",
-    "Someone's favorite Anime",
-    "Best Person in the World",
+    "Prof who always says machine ",
+    "Prof who always comes late",
+    "Prof who always use ChatGPT ",
+    "Prof who doesn't even know what they're teaching",
+    "Best prof in the department, maybe for BDD!",
   ];
-  const img = ["november.png", "swimming.jpg", "onepiece.jpg", "mossaab.jpg"];
-  const row = [4, 4, 4, 5];
-  const col = [2, 2, 2, 2];
-  const Scale = [0.7, 0.9, 0.7, 0.2];
+  const img = [
+    "nafir.png",
+    "lalaoua.png",
+    "foughali.png",
+    "lalaoua.png",
+    "lezhare.jpg",
+  ];
+  const row = [2, 4, 4, 4, 4];
+  const col = [2, 2, 2, 2, 2];
+  const MaxRandom = [4, 8, 8, 8, 8];
+
+  const Scale = [0.1, 0.12, 0.3, 0.1, 0.2];
   const [word, setword] = useState(words[level]);
   const [guess, setguess] = useState(geusses[level]);
   const prevWordc = useRef();
   const [wordc, setwordc] = useState("*".repeat(word.length));
   const [tentative, settentative] = useState(7);
-  const SoundIncorrect = new Howl({ src: [IncorrectSound] });
-  const Soundcorrect = new Howl({ src: ["/win.mp3"] });
+  const SoundIncorrect = new Howl({ src: [IncorrectSound], preload: true });
+  const Soundcorrect = new Howl({ src: ["/win.mp3"], preload: true });
 
+  const [usedIndices, setUsedIndices] = useState([]); // Track used indices
+
+  const getRandomBetween = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const getUniqueRandom = (min, max, usedIndices) => {
+    let randomIndex = getRandomBetween(min, max);
+    while (usedIndices.includes(randomIndex)) {
+      randomIndex = getRandomBetween(min, max); // Keep generating a new random number until it's unique
+    }
+    return randomIndex;
+  };
   useEffect(() => {
     if (find) {
-      let randomIndex = Math.floor(Math.random() * array.length);
-      let randomNumber = array[randomIndex];
-      array.splice(randomIndex, 1);
-      setarray([...array]); // Create a new array reference
-      setrandom(randomNumber);
+      // let randomIndex = Math.floor(Math.random() * array.length);
+      // let randomNumber = array[randomIndex];
+      // array.splice(randomIndex, 1);
+      // setarray([...array]); // Create a new array reference
+      console.log(words[level].length);
+      var r = getUniqueRandom(0, words[level].length - 1, usedIndices);
+
+      console.log(r);
+      setrandom(r);
+      setUsedIndices((prevUsed) => [...prevUsed, r]); // Add this index to the used indices
     }
   }, [find]);
 
@@ -310,6 +345,7 @@ function Game() {
     setword(words[level]);
     setwordc("*".repeat(words[level].length));
     setguess(geusses[level]);
+    setUsedIndices([]);
   }, [level]);
 
   useEffect(() => {

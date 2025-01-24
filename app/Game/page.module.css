@@ -104,6 +104,7 @@
 }
 
 .body {
+  /* iOS-specific prefix */
   font-family: "Mochiy Pop One", sans-serif;
   font-weight: 36px;
   font-style: normal;
