@@ -374,6 +374,7 @@ function Game() {
     settentative_effect(style.tentative);
 
     if (tentative === 0) {
+      setUsedIndices([]);
       lose();
       settentative(7);
       setlevel(0);
