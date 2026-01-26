@@ -164,7 +164,10 @@ export default function Page() {
               </div>{" "}
               <div className="text-right">
                 <div className="text-xs text-indigo-100"> Coef total </div>{" "}
-                <div className="text-2xl font-bold"> {computed.sumCoef} </div>{" "}
+                <div className="text-2xl font-bold">
+                  {" "}
+                  {computed.sumCoef}{" "}
+                </div>{" "}
               </div>{" "}
             </div>{" "}
           </div>{" "}
@@ -248,10 +251,12 @@ export default function Page() {
                         initial={{ scale: 1.2, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         className={`text-3xl font-bold ${getGradeColor(
-                          m.moduleNote
+                          m.moduleNote,
                         )}`}
                       >
-                        {m.moduleNote === null ? "—" : m.moduleNote.toFixed(2)}{" "}
+                        {m.moduleNote === null
+                          ? "—"
+                          : m.moduleNote.toFixed(2)}{" "}
                       </motion.span>{" "}
                     </div>{" "}
                   </div>{" "}
